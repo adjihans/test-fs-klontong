@@ -10,8 +10,11 @@ function flattenProductCategoryName(product) {
 class ProductController {
   static async getAllProduct(req, res, next) {
     try {
-      const products = await Product.findAll({
+      const { page, limit } = req.query;
+      const { count, rows: products } = await Product.findAndCountAll({
         include: Category,
+        offset: (page - 1) * 10,
+        limit: 10,
       });
       if (!products) throw { msg: "PRODUCTS_NOT_FOUND" };
       const newProducts = products.map((product) => {
@@ -21,6 +24,7 @@ class ProductController {
       res.status(200).json({
         msg: "get product success",
         products: newProducts,
+        totalPage: Math.ceil(count / limit),
       });
     } catch (err) {
       next(err);
