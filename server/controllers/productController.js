@@ -1,22 +1,26 @@
-const { User } = require("../models");
+const { Product, Category } = require("../models");
+
+function flattenProductCategoryName(product) {
+  const newProduct = { ...product };
+  newProduct.categoryName = product.Category.categoryName;
+  delete newProduct.Category;
+  return newProduct;
+}
 
 class ProductController {
   static async getAllProduct(req, res, next) {
     try {
-      const { email, password, fullName } = req.body;
-      // let user = await User.create({
-      //     email,
-      //     password,
-      //     fullName
-      // })
-      // if(!user) throw { msg: 'VALIDATION_ERROR'}
-      res.status(201).json({
+      const products = await Product.findAll({
+        include: Category,
+      });
+      if (!products) throw { msg: "PRODUCTS_NOT_FOUND" };
+      const newProducts = products.map((product) => {
+        const newProduct = product.get({ plain: true });
+        return flattenProductCategoryName(newProduct);
+      });
+      res.status(200).json({
         msg: "get product success",
-        // statusCode: 201,
-        // id: user.id,
-        // email: user.email,
-        // fullName: user.fullName,
-        // role: user.role,
+        products: newProducts,
       });
     } catch (err) {
       next(err);
@@ -25,20 +29,19 @@ class ProductController {
 
   static async getProductDetail(req, res, next) {
     try {
-      const { email, password, fullName } = req.body;
-      // let user = await User.create({
-      //     email,
-      //     password,
-      //     fullName
-      // })
-      // if(!user) throw { msg: 'VALIDATION_ERROR'}
-      res.status(201).json({
+      const { id } = req.params;
+      const product = await Product.findOne({
+        where: { id },
+        include: Category,
+      });
+      if (!product) throw { msg: "PRODUCT_NOT_FOUND" };
+      const newProduct = product.get({
+        plain: true,
+      });
+      const flattenProduct = flattenProductCategoryName(newProduct);
+      res.status(200).json({
         msg: "get product detail success",
-        // statusCode: 201,
-        // id: user.id,
-        // email: user.email,
-        // fullName: user.fullName,
-        // role: user.role,
+        product: flattenProduct,
       });
     } catch (err) {
       next(err);
@@ -47,25 +50,34 @@ class ProductController {
 
   static async addProduct(req, res, next) {
     try {
-      const { email, password } = req.body;
-      //   let user = await User.findOne({
-      //     where: {
-      //       email,
-      //     },
-      //   });
-      //   if (!user) throw { name: "INVALID_EMAIL_OR_PASSWORD" };
-      //   if (!comparePass(password, user.password))
-      //     throw { name: "INVALID_EMAIL_OR_PASSWORD" };
-      //   let payload = {
-      //     id: user.id,
-      //     email: user.email,
-      //     role: user.role,
-      //   };
-      //   let access_token = generateToken(payload);
+      const {
+        name,
+        sku,
+        description,
+        weight,
+        width,
+        height,
+        length,
+        image,
+        harga,
+        categoryId,
+      } = req.body;
+      const product = await Product.create({
+        name,
+        sku,
+        description,
+        width,
+        weight,
+        height,
+        length,
+        image,
+        harga,
+        categoryId,
+      });
+      if (!product) throw { msg: "VALIDATION_ERROR" };
       res.status(200).json({
-        msg: "add product success",
-        // fullName: user.fullName,
-        // access_token,
+        msg: "Product add is success",
+        product,
       });
     } catch (err) {
       next(err);
@@ -74,25 +86,47 @@ class ProductController {
 
   static async updateProduct(req, res, next) {
     try {
-      const { email, password } = req.body;
-      //   let user = await User.findOne({
-      //     where: {
-      //       email,
-      //     },
-      //   });
-      //   if (!user) throw { name: "INVALID_EMAIL_OR_PASSWORD" };
-      //   if (!comparePass(password, user.password))
-      //     throw { name: "INVALID_EMAIL_OR_PASSWORD" };
-      //   let payload = {
-      //     id: user.id,
-      //     email: user.email,
-      //     role: user.role,
-      //   };
-      //   let access_token = generateToken(payload);
+      const { id } = req.params;
+      let product = await Product.findOne({
+        where: {
+          id,
+        },
+      });
+      if (!product) throw { msg: "PRODUCT_NOT_FOUND" };
+      const {
+        name,
+        sku,
+        description,
+        weight,
+        width,
+        height,
+        length,
+        image,
+        harga,
+        categoryId,
+      } = req.body;
+      product = await Product.update(
+        {
+          name,
+          sku,
+          description,
+          weight,
+          width,
+          height,
+          length,
+          image,
+          harga,
+          categoryId,
+        },
+        {
+          where: { id },
+          returning: true,
+        }
+      );
+      if (!product) throw { msg: "VALIDATION_ERROR" };
       res.status(200).json({
         msg: "update product success",
-        // fullName: user.fullName,
-        // access_token,
+        product,
       });
     } catch (err) {
       next(err);
@@ -101,26 +135,19 @@ class ProductController {
 
   static async deleteProduct(req, res, next) {
     try {
-      const { email, password } = req.body;
-      //   let user = await User.findOne({
-      //     where: {
-      //       email,
-      //     },
-      //   });
-      //   if (!user) throw { name: "INVALID_EMAIL_OR_PASSWORD" };
-      //   if (!comparePass(password, user.password))
-      //     throw { name: "INVALID_EMAIL_OR_PASSWORD" };
-      //   let payload = {
-      //     id: user.id,
-      //     email: user.email,
-      //     role: user.role,
-      //   };
-      //   let access_token = generateToken(payload);
-      res.status(200).json({
-        msg: "delete product success",
-        // fullName: user.fullName,
-        // access_token,
+      const { id } = req.params;
+      let product = await Product.findOne({
+        where: {
+          id,
+        },
       });
+      if (!product) throw { msg: "PRODUCT_NOT_FOUND" };
+      product = await Product.destroy({
+        where: {
+          id: product.id,
+        },
+      });
+      res.status(200).json({ msg: "Product has been deleted" });
     } catch (err) {
       next(err);
     }
