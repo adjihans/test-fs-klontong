@@ -1,0 +1,39 @@
+.login-form {
+    .input-form-section {
+        display: flex;
+        margin-bottom: 1rem;
+        width: 100%;
+
+        label {
+            margin: 0 1rem 0 auto;
+        }
+
+        input {
+            margin: 0 auto 0 1rem;
+        }
+    }
+
+    .input-submit {
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+        width: 10rem;
+    }
+}
+
+.login-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    a {
+        margin: 1rem 1rem 0;
+        width: 10rem;
+    
+        button {
+            width: 100%;
+        }
+    }
+}
