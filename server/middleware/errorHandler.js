@@ -35,6 +35,10 @@ function errorHandler(err, req, res, next) {
       errors.push("Product not found!");
       statusCode = 404;
       break;
+    case `CATEGORY_NOT_FOUND`:
+      errors.push("Category not found!");
+      statusCode = 404;
+      break;
     default:
       errors.push("Internal server error");
   }
