@@ -6,11 +6,6 @@ const loader = () => <>loading...</>;
 
 export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Products />,
-    loader,
-  },
-  {
     path: "/login",
     element: <Login />,
     loader,
@@ -21,7 +16,12 @@ export const router = createBrowserRouter([
     loader,
   },
   {
-    path: "/:id",
+    path: "/products",
+    element: <Products />,
+    loader,
+  },
+  {
+    path: "/products/:id",
     element: <>Product Detail</>,
     loader,
     children: [

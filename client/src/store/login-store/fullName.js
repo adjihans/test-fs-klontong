@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const fullName = createSlice({
-  name: "fullName",
+  name: "fullNameStore",
   initialState: {
-    fullName: "",
+    value: "",
   },
   reducers: {
     setFullName: (state, action) => {
