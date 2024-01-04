@@ -1,0 +1,25 @@
+.product-form-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+
+    padding: 2rem;
+}
+
+.product-form {
+    width: 100%;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.input-wrapper input,
+.input-wrapper textarea {
+    margin-left: auto;
+    margin-right:  0;
+}

@@ -8,3 +8,11 @@ export const getAllProductRepositories = async (page, limit) => {
 export const getProductDetailRepositories = async (productId) => {
   return await axiosClient.get(products.getOne(productId));
 };
+
+export const createProductRepositories = async (payload, access_token) => {
+  return await axiosClient.post(products.add, payload, {
+    headers: {
+      access_token,
+    },
+  });
+};
