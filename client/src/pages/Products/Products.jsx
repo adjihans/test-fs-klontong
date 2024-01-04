@@ -42,11 +42,10 @@ export const Products = () => {
           />
           <input type="submit" value="search" />
         </form>
-        <table className="product-table">
+        <table className="table table-responsive">
           <thead>
             <td>Name</td>
             <td>SKU</td>
-            <td>Category</td>
             <td>Image</td>
             <td>Description</td>
             <td>Price</td>
@@ -62,7 +61,6 @@ export const Products = () => {
               >
                 <td>{product.name}</td>
                 <td>{product.sku}</td>
-                <td>{product.categoryName}</td>
                 <td>
                   <img
                     src={product.image}

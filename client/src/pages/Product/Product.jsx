@@ -33,7 +33,7 @@ export const Product = () => {
             <div className="dot-black" />
             <p>{generateIDR(product.harga)}</p>
             <div className="dot-black" />
-            <p>{product.sku}</p>
+            <p>SKU: {product.sku}</p>
           </div>
           <label>Description</label>
           <p>{product.description}</p>
