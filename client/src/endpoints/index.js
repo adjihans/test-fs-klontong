@@ -10,8 +10,10 @@ export const users = {
 };
 
 export const products = {
-  getAll: (page, limit = 10) =>
-    `${endpointURL.products}/?page=${page}&limit=${limit}`,
+  getAll: (page, limit = 10, keyword) =>
+    `${endpointURL.products}/?page=${page}&limit=${limit}${
+      keyword ? `&keyword=${keyword}` : ""
+    }`,
   getOne: (productId) => `${endpointURL.products}/${productId}`,
   add: `${endpointURL.products}/add`,
   update: (productId) => `${endpointURL.products}/update/${productId}`,

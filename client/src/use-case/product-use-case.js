@@ -7,8 +7,8 @@ import {
   updateProductRepositories,
 } from "../repositories/products-repositories";
 
-export const getAllProductUseCase = async (page, limit) => {
-  return await getAllProductRepositories(page, limit);
+export const getAllProductUseCase = async (page, limit, keyword) => {
+  return await getAllProductRepositories(page, limit, keyword);
 };
 
 export const getProductDetailUseCase = async (productId) => {

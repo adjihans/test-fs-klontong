@@ -10,6 +10,9 @@ export const Products = () => {
     currentPage,
     totalPage,
     products,
+    keyword,
+    setKeyword,
+    handleOnSubmitSearchProduct,
     handleOnClickNextPage,
     handleOnClickPrevPage,
     handleOnClickProduct,
@@ -29,6 +32,16 @@ export const Products = () => {
           </Link>
         </div>
         <h1>Product List</h1>
+        <form onSubmit={handleOnSubmitSearchProduct}>
+          <input
+            type="text"
+            name="keyword"
+            placeholder="Search Product..."
+            value={keyword}
+            onChange={(event) => setKeyword(event.target.value)}
+          />
+          <input type="submit" value="search" />
+        </form>
         <table className="product-table">
           <thead>
             <td>Name</td>
