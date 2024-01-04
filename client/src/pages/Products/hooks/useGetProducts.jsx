@@ -5,11 +5,10 @@ import {
   setProducts,
   setCurrentPage,
   setTotalPage,
-  setProduct,
 } from "../../../store/product-store/productList";
 import { useNavigate } from "react-router-dom";
 
-export const useGetProduct = () => {
+export const useGetProducts = () => {
   const { products, currentPage, totalPage } = useSelector(
     (state) => state.productListReducer
   );
@@ -38,7 +37,6 @@ export const useGetProduct = () => {
   };
 
   const handleOnClickProduct = (productId) => {
-    dispatch(setProduct(productId));
     navigate(`/products/${productId}`);
   };
 

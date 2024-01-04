@@ -12,4 +12,5 @@ export const users = {
 export const products = {
   getAll: (page, limit = 10) =>
     `${endpointURL.products}/?page=${page}&limit=${limit}`,
+  getOne: (productId) => `${endpointURL.products}/${productId}`,
 };

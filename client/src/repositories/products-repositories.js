@@ -4,3 +4,7 @@ import axiosClient from "../utils/customAPI";
 export const getAllProductRepositories = async (page, limit) => {
   return await axiosClient.get(products.getAll(page, limit));
 };
+
+export const getProductDetailRepositories = async (productId) => {
+  return await axiosClient.get(products.getOne(productId));
+};

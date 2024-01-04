@@ -13,9 +13,7 @@ export const product = createSlice({
       state.products = action.payload;
     },
     setProduct: (state, action) => {
-      state.product = state.products.filter(
-        (product) => product.id === action.payload
-      );
+      state.product = action.payload;
     },
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;

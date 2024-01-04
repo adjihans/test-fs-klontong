@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import { useGetProduct } from "./hooks/useGetProduct";
-import { sliceText } from "../../utils/stringUtils";
+import { useGetProducts } from "./hooks/useGetProducts";
+import { generateIDR, sliceText } from "../../utils/stringUtils";
 import "./Products.css";
 
 export const Products = () => {
@@ -11,7 +11,7 @@ export const Products = () => {
     handleOnClickNextPage,
     handleOnClickPrevPage,
     handleOnClickProduct,
-  } = useGetProduct();
+  } = useGetProducts();
   return (
     <Suspense fallback={<>Loading...</>}>
       <section className="products-section">
@@ -49,7 +49,7 @@ export const Products = () => {
                   />
                 </td>
                 <td>{`${sliceText(product.description, 0, 15)}...`}</td>
-                <td>{product.harga}</td>
+                <td>{generateIDR(product.harga)}</td>
               </tr>
             ))}
           </tbody>
