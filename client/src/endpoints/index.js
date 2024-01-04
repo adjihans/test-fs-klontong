@@ -15,6 +15,7 @@ export const products = {
   getOne: (productId) => `${endpointURL.products}/${productId}`,
   add: `${endpointURL.products}/add`,
   update: (productId) => `${endpointURL.products}/update/${productId}`,
+  delete: (productId) => `${endpointURL.products}/delete/${productId}`,
 };
 
 export const categories = {

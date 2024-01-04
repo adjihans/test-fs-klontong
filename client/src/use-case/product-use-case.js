@@ -1,6 +1,7 @@
 import { getAllCategories } from "../repositories/categories.repositories";
 import {
   createProductRepositories,
+  deleteProductRepositories,
   getAllProductRepositories,
   getProductDetailRepositories,
   updateProductRepositories,
@@ -25,6 +26,9 @@ export const updateProductUseCase = async (
 ) => {
   return await updateProductRepositories(payload, access_token, productId);
 };
+
+export const deleteProductUseCase = async (access_token, productId) =>
+  await deleteProductRepositories(access_token, productId);
 
 export const getCategoriesUseCase = async (access_token) =>
   await getAllCategories(access_token);

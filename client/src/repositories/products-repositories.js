@@ -28,3 +28,10 @@ export const updateProductRepositories = async (
     },
   });
 };
+
+export const deleteProductRepositories = async (access_token, productId) =>
+  await axiosClient.delete(products.delete(productId), {
+    headers: {
+      access_token,
+    },
+  });

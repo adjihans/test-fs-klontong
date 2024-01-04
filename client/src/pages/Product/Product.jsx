@@ -1,15 +1,20 @@
 import { generateIDR } from "../../utils/stringUtils";
-import { useGetProduct } from "./hooks/useGetProduct";
+import { useProductDetail } from "./hooks/useProductDetail";
 import "./Product.css";
 import { Link } from "react-router-dom";
 
 export const Product = () => {
-  const { product, id } = useGetProduct();
+  const { product, id, handleOnDeleteProduct } = useProductDetail();
   return (
     <section className="product-section">
       <div className="back-container">
         <Link to="/products">{"<"} Back to products</Link>
-        <Link to={`/products/${id}/update`}>Edit Detail</Link>
+        <div>
+          <Link to={`/products/${id}/update`}>Edit Detail</Link>
+          <Link onClick={handleOnDeleteProduct} style={{ marginLeft: "1rem" }}>
+            Delete Product
+          </Link>
+        </div>
       </div>
       <img
         className="product-image"
