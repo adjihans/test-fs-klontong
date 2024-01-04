@@ -3,9 +3,13 @@ import { useGetProduct } from "./hooks/useGetProduct";
 import "./Product.css";
 
 export const Product = () => {
-  const { product } = useGetProduct();
+  const { product, id } = useGetProduct();
   return (
     <section className="product-section">
+      <div className="back-container">
+        <a href="/products">{"<"} Back to products</a>
+        <a href={`/products/${id}/update`}>Edit Detail</a>
+      </div>
       <img
         className="product-image"
         src={product.image}

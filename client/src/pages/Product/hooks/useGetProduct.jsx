@@ -19,5 +19,5 @@ export const useGetProduct = () => {
     getProductDetail();
   }, []);
 
-  return { product };
+  return { product, id };
 };
