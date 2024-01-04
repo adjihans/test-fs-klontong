@@ -3,6 +3,7 @@ import { useGetProducts } from "./hooks/useGetProducts";
 import { generateIDR, sliceText } from "../../utils/stringUtils";
 import "./Products.css";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export const Products = () => {
   const {
@@ -18,6 +19,14 @@ export const Products = () => {
       <section className="products-section">
         <div className="back-container">
           <Link to="/products/add">Add products</Link>
+          <Link
+            to="/login"
+            onClick={() => {
+              Cookies.remove("access_token");
+            }}
+          >
+            Sign Out
+          </Link>
         </div>
         <h1>Product List</h1>
         <table className="product-table">

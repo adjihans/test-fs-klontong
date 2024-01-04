@@ -20,7 +20,7 @@ export const useLogin = () => {
     if (!data) return;
     dispatch(setFullName(data?.fullName));
     Cookies.set("access_token", data?.access_token, { expires: 1 });
-    navigate("/");
+    navigate("/products");
   };
 
   return { handleOnSubmit };

@@ -28,4 +28,5 @@
 .products-section .back-container {
     display: flex;
     justify-content: flex-end;
+    gap: 1rem;
 }
