@@ -15,12 +15,14 @@ class ProductController {
         include: Category,
         offset: page ? (page - 1) * 10 : 0,
         limit: limit ? limit : 10,
+        order: [["updatedAt", "DESC"]],
       });
       if (!products) throw { msg: "PRODUCTS_NOT_FOUND" };
       const newProducts = products.map((product) => {
         const newProduct = product.get({ plain: true });
         return flattenProductCategoryName(newProduct);
       });
+      console.log(newProducts);
       res.status(200).json({
         msg: "get product success",
         products: newProducts,
