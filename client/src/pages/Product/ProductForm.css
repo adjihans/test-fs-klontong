@@ -19,7 +19,9 @@
 }
 
 .input-wrapper input,
+.input-wrapper select,
 .input-wrapper textarea {
     margin-left: auto;
     margin-right:  0;
+    width: 10rem;
 }

@@ -14,6 +14,7 @@ export const products = {
     `${endpointURL.products}/?page=${page}&limit=${limit}`,
   getOne: (productId) => `${endpointURL.products}/${productId}`,
   add: `${endpointURL.products}/add`,
+  update: (productId) => `${endpointURL.products}/update/${productId}`,
 };
 
 export const categories = {

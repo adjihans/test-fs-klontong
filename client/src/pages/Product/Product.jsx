@@ -1,14 +1,15 @@
 import { generateIDR } from "../../utils/stringUtils";
 import { useGetProduct } from "./hooks/useGetProduct";
 import "./Product.css";
+import { Link } from "react-router-dom";
 
 export const Product = () => {
   const { product, id } = useGetProduct();
   return (
     <section className="product-section">
       <div className="back-container">
-        <a href="/products">{"<"} Back to products</a>
-        <a href={`/products/${id}/update`}>Edit Detail</a>
+        <Link to="/products">{"<"} Back to products</Link>
+        <Link to={`/products/${id}/update`}>Edit Detail</Link>
       </div>
       <img
         className="product-image"

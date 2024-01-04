@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { useGetProducts } from "./hooks/useGetProducts";
 import { generateIDR, sliceText } from "../../utils/stringUtils";
 import "./Products.css";
+import { Link } from "react-router-dom";
 
 export const Products = () => {
   const {
@@ -15,6 +16,9 @@ export const Products = () => {
   return (
     <Suspense fallback={<>Loading...</>}>
       <section className="products-section">
+        <div className="back-container">
+          <Link to="/products/add">Add products</Link>
+        </div>
         <h1>Product List</h1>
         <table className="product-table">
           <thead>

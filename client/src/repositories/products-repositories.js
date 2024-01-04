@@ -16,3 +16,15 @@ export const createProductRepositories = async (payload, access_token) => {
     },
   });
 };
+
+export const updateProductRepositories = async (
+  payload,
+  access_token,
+  productId
+) => {
+  return await axiosClient.put(products.update(productId), payload, {
+    headers: {
+      access_token,
+    },
+  });
+};

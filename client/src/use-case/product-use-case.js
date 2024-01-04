@@ -3,6 +3,7 @@ import {
   createProductRepositories,
   getAllProductRepositories,
   getProductDetailRepositories,
+  updateProductRepositories,
 } from "../repositories/products-repositories";
 
 export const getAllProductUseCase = async (page, limit) => {
@@ -15,6 +16,14 @@ export const getProductDetailUseCase = async (productId) => {
 
 export const createProductUseCase = async (payload, access_token) => {
   return await createProductRepositories(payload, access_token);
+};
+
+export const updateProductUseCase = async (
+  payload,
+  access_token,
+  productId
+) => {
+  return await updateProductRepositories(payload, access_token, productId);
 };
 
 export const getCategoriesUseCase = async (access_token) =>

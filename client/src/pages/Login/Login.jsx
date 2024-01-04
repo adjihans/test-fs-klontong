@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import "./Login.css";
 import { useLogin } from "./hooks/useLogin";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const { handleOnSubmit } = useLogin();
@@ -19,9 +20,9 @@ const Login = () => {
           </div>
           <input className="input-submit" type="submit" value="Login" />
         </form>
-        <a href="/register">
+        <Link to="/register">
           <button>Register</button>
-        </a>
+        </Link>
       </section>
     </Suspense>
   );
