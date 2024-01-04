@@ -13,8 +13,8 @@ class ProductController {
       const { page, limit } = req.query;
       const { count, rows: products } = await Product.findAndCountAll({
         include: Category,
-        offset: (page - 1) * 10,
-        limit: 10,
+        offset: page ? (page - 1) * 10 : 0,
+        limit: limit ? limit : 10,
       });
       if (!products) throw { msg: "PRODUCTS_NOT_FOUND" };
       const newProducts = products.map((product) => {
