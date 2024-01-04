@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { Product, Category } = require("../models");
 
 function flattenProductCategoryName(product) {
@@ -10,11 +11,16 @@ function flattenProductCategoryName(product) {
 class ProductController {
   static async getAllProduct(req, res, next) {
     try {
-      const { page, limit } = req.query;
+      const { page, limit, keyword } = req.query;
       const { count, rows: products } = await Product.findAndCountAll({
         include: Category,
+        where: {
+          name: {
+            [Op.like]: `%${keyword ?? ""}%`,
+          },
+        },
         offset: page ? (page - 1) * 10 : 0,
-        limit: limit ? limit : 10,
+        limit: limit ?? 10,
         order: [["updatedAt", "DESC"]],
       });
       if (!products) throw { msg: "PRODUCTS_NOT_FOUND" };
@@ -22,11 +28,10 @@ class ProductController {
         const newProduct = product.get({ plain: true });
         return flattenProductCategoryName(newProduct);
       });
-      console.log(newProducts);
       res.status(200).json({
         msg: "get product success",
         products: newProducts,
-        totalPage: Math.ceil(count / limit),
+        totalPage: Math.ceil(count / (limit ?? 10)),
       });
     } catch (err) {
       next(err);
