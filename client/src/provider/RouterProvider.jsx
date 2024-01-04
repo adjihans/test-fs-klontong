@@ -3,6 +3,7 @@ import { Products } from "../pages/Products/Products";
 import Login from "../pages/Login/Login";
 import { Product } from "../pages/Product/Product";
 import { ProductForm } from "../pages/Product/ProductForm";
+import { Register } from "../pages/Register/Register";
 
 const loader = () => <>loading...</>;
 
@@ -14,7 +15,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element: <>Register</>,
+    element: <Register />,
     loader,
   },
   {
